@@ -77,13 +77,11 @@ class netStat:
         sIstat = np.zeros((3*len(self.Lambdas,)))
         Chastat = np.zeros((3*len(self.Lambdas,)))
         Socstat = np.zeros((3*len(self.Lambdas,)))
-            
         for i in range(len(self.Lambdas)):
-            MIstat[(i*3):((i+1)*3)] = self.HT_MI.update_get_1D_Stats(srcMAC+srcIP, timestamp, datagramSize, self.Lambdas[i])
+            MIstat[(i*3):((i+1)*3)] = self.HT_MI.update_get_1D_Stats(str(srcMAC)+srcIP, timestamp, datagramSize, self.Lambdas[i])
         
         # for i in range(len(self.Lambdas)):
         #     sIstat[(i*3):((i+1)*3)] = self.HT_MI.update_get_1D_Stats(srcIP, timestamp, datagramSize, self.Lambdas[i])
-        
         for i in range(len(self.Lambdas)):
             Chastat[(i*3):((i+1)*3)] = self.HT_MI.update_get_1D_Stats(srcIP+dstIP, timestamp, datagramSize, self.Lambdas[i])
 
@@ -108,7 +106,7 @@ class netStat:
         HpHpstat =  np.zeros((4*len(self.Lambdas,)))
         if srcProtocol == 'arp':
             for i in range(len(self.Lambdas)):
-                HpHpstat[(i*4):((i+1)*4)] = self.HT_Hp.update_get_1D2D_Stats(srcMAC, dstMAC, timestamp, datagramSize, self.Lambdas[i])
+                HpHpstat[(i*4):((i+1)*4)] = self.HT_Hp.update_get_1D2D_Stats(str(srcMAC), str(dstMAC), timestamp, datagramSize, self.Lambdas[i])
         else:  # some other protocol (e.g. TCP/UDP)
             for i in range(len(self.Lambdas)):
                 HpHpstat[(i*4):((i+1)*4)] = self.HT_Hp.update_get_1D2D_Stats(srcIP + srcProtocol, dstIP + dstProtocol, timestamp, datagramSize, self.Lambdas[i])

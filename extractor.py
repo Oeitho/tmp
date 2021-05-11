@@ -16,12 +16,9 @@ if __name__ == "__main__":
     pcap_file = arg.input_path
 
     feat_file = arg.output_path
-
     scapyin = rdpcap(pcap_file)
-
     FE = Fe.Kitsune(scapyin, np.Inf)
     feature, _ = RunFE(FE)
-
     print(np.asarray(feature).shape)
     np.save(feat_file,feature)
 
